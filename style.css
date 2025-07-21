@@ -1,68 +1,94 @@
-/*--- CSS ---*/
-/*-------- GENERAL --------*/
+/* Reset & Base */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 body {
-    font-family: sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f7fa;
+  color: #333;
+  padding: 20px;
 }
 
+/* Container */
 .container {
-    padding: 0px 25px;
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
 }
 
-/*-------- HEADER --------*/
+/* Header */
 #main-header {
-    background-color: rgb(0, 126, 0);
-    height: 70px;
-    display: flex;
-    align-items: center;
-    padding: 20px;
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
-
 #header-title {
-    color: white;
-    font-size: 40px;
+  font-size: 2rem;
 }
 
-/*-------- MAIN CONTENT --------*/
-#main {
-    border: 1px solid rgb(180, 180, 180);
-    padding: 20px;
-    margin-top: 20px;
+/* Main Card */
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
 }
 
+/* Headings */
 .title {
-    margin: 20px 0px;
-    font-size: 30px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
 }
 
-.title:first-child {
-    margin-top: 0px;
+/* Inputs & Buttons */
+input[type="text"] {
+  padding: 10px;
+  margin-right: 10px;
+  width: 70%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
-
-input {
-    height: 30px;
-    border: 1px solid rgb(180, 180, 180);
-}
-
 .btn {
-    background-color: rgb(39, 39, 39);
-    color: white;
-    width: 100px;
-    border: 0px;
-    cursor: pointer;
+  background-color: #3498db;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.btn:hover {
+  background-color: #2980b9;
 }
 
+/* List */
+.list-group {
+  list-style: none;
+  margin-top: 20px;
+}
 .list-group-item {
-    border-bottom: 1px solid rgb(180, 180, 180);
-    list-style-type: none;
-    margin-bottom: 20px;
+  background: #ecf0f1;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-.list-group-item:last-child {
-    margin-bottom: 10px;
+.delete-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.delete-btn:hover {
+  background: #c0392b;
 }

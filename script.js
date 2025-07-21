@@ -1,30 +1,74 @@
-// script.js
-var form = document.getElementById('addForm');
-var itemList = document.getElementById('items');
+const form = document.getElementById('addForm');
+const itemList = document.getElementById('items');
+const filter = document.getElementById('filter');
 
-//Form
+// Load saved items
+document.addEventListener('DOMContentLoaded', loadItems);
+
+// Add item
 form.addEventListener('submit', addItem);
 
+// Remove item
+itemList.addEventListener('click', removeItem);
 
-//addItem
-function addItem(e){
-    e.preventDefault(); // Corrected typo here!
+// Filter items
+filter.addEventListener('keyup', filterItems);
 
-    // Get input value
-    var newItem = document.getElementById('itemInput').value; // Corrected ID here!
+function addItem(e) {
+  e.preventDefault();
+  const newItem = document.getElementById('itemInput').value;
 
-    // Create new li element
-    var li = document.createElement('li'); // Correctly create new li element
+  if (newItem.trim() !== '') {
+    createListItem(newItem);
+    saveToLocalStorage(newItem);
+    form.reset();
+  }
+}
 
-    // Add class
-    li.className = 'list-group-item';
+function createListItem(text) {
+  const li = document.createElement('li');
+  li.className = 'list-group-item';
+  li.textContent = text;
 
-    // Add text node
-    li.appendChild(document.createTextNode(newItem));
+  const deleteBtn = document.createElement('button');
+  deleteBtn.className = 'delete-btn';
+  deleteBtn.textContent = 'Delete';
 
-    // Append li to the item list
-    itemList.appendChild(li);
+  li.appendChild(deleteBtn);
+  itemList.appendChild(li);
+}
 
-    // Clear the input field after adding the item (optional, but good practice)
-    document.getElementById('itemInput').value = '';
+function removeItem(e) {
+  if (e.target.classList.contains('delete-btn')) {
+    const itemText = e.target.parentElement.firstChild.textContent;
+    e.target.parentElement.remove();
+    removeFromLocalStorage(itemText);
+  }
+}
+
+function filterItems(e) {
+  const text = e.target.value.toLowerCase();
+  const items = itemList.getElementsByTagName('li');
+
+  Array.from(items).forEach((item) => {
+    const itemName = item.firstChild.textContent.toLowerCase();
+    item.style.display = itemName.includes(text) ? 'flex' : 'none';
+  });
+}
+
+function saveToLocalStorage(item) {
+  let items = JSON.parse(localStorage.getItem('items')) || [];
+  items.push(item);
+  localStorage.setItem('items', JSON.stringify(items));
+}
+
+function removeFromLocalStorage(item) {
+  let items = JSON.parse(localStorage.getItem('items')) || [];
+  items = items.filter((i) => i !== item);
+  localStorage.setItem('items', JSON.stringify(items));
+}
+
+function loadItems() {
+  const items = JSON.parse(localStorage.getItem('items')) || [];
+  items.forEach((item) => createListItem(item));
 }
